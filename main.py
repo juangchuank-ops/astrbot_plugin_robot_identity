@@ -30,13 +30,28 @@ class RobotIdentity(Star):
         
         # 2. 判断触发逻辑
         # 条件：内容严格等于 触发关键词
+        
+        # 兼容性处理：安全获取事件属性
+        is_group = getattr(event, 'is_group', False)
+        is_private = getattr(event, 'is_private', False)
+        is_at_me = getattr(event, 'is_at_me', False)
+        
+        # 如果 is_group/is_private 未定义，尝试从 message_obj 推断
+        if not is_group and not is_private and hasattr(event, 'message_obj'):
+            # 大多数适配器中，有 group_id 则为群聊，否则为私聊
+            group_id = getattr(event.message_obj, 'group_id', None)
+            if group_id:
+                is_group = True
+            else:
+                is_private = True
+                
         if text_content == trigger_keyword:
             # 场景A：群聊，且被 @
-            if event.is_group and event.is_at_me:
+            if is_group and is_at_me:
                 should_reply = True
             
             # 场景B：私聊
-            elif event.is_private:
+            elif is_private:
                 should_reply = True
                 
         # 3. 回复
