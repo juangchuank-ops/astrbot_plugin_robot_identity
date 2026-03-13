@@ -1,0 +1,12 @@
+{
+  "reply_content": {
+    "type": "string",
+    "description": "当触发身份确认时回复的内容",
+    "default": "我是 AstrBot 机器人，请问有什么可以帮您？"
+  },
+  "trigger_keyword": {
+    "type": "string",
+    "description": "触发身份确认的关键词（默认为“你”）",
+    "default": "你"
+  }
+}

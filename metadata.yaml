@@ -1,0 +1,15 @@
+name: astrbot_plugin_robot_identity
+display_name: 机器人身份确认
+description: 当用户在群聊@机器人说“你”，或在私聊直接说“你”时，自动回复确认机器人身份。
+version: 0.1.0
+author: user
+astrbot_version: ">=3,<5"
+support_platforms:
+  - aiocqhttp
+  - qq_official
+  - telegram
+  - discord
+  - wecom
+  - lark
+  - dingtalk
+  - kook
